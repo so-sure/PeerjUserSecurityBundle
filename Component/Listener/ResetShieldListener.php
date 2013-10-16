@@ -173,7 +173,7 @@ class ResetShieldListener
 				if ($this->redirectWhenDeniedRoute) {
 					return $event->setResponse(new RedirectResponse($this->router->generate($this->redirectWhenDeniedRoute, $this->redirectWhenDeniedRouteParams)));
 				} else {
-					throw new HttpException(503, 'flood control - reset blocked');
+					throw new HttpException(503, 'There have been too many password reset requests from this ip address recently.  Please wait ' . $this->blockForMinutes . ' minutes and try again');
 				}
             }
         }

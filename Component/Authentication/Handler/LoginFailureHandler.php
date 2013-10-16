@@ -81,7 +81,7 @@ class LoginFailureHandler extends DefaultAuthenticationFailureHandler implements
 	 * @param \Peerj\UserSecurityBundle\Component\Authentication\Tracker\LoginFailureTracker $loginFailureTracker
 	 * @param bool $enabled
      */
-    public function __construct(HttpKernelInterface $httpKernel, HttpUtils $httpUtils, array $options, LoggerInterface $logger = null, LoginFailureTracker $loginFailureTracker, $enabled)
+    public function __construct(HttpKernelInterface $httpKernel, HttpUtils $httpUtils, array $options, LoggerInterface $logger = null, LoginFailureTracker $loginFailureTracker = null, $enabled = false)
     {
 		$this->loginFailureTracker = $loginFailureTracker;
 		$this->enabled = $enabled;

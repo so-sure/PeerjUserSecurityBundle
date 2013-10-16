@@ -81,7 +81,11 @@ class PeerjUserSecurityExtension extends Extension
         $container->setParameter('peerj_user_security.login_shield.primary_login_route.name', $config['login_shield']['primary_login_route']['name']);
         $container->setParameter('peerj_user_security.login_shield.primary_login_route.params', $config['login_shield']['primary_login_route']['params']);
 
-        $container->setParameter('peerj_user_security.login_shield.redirect_when_denied_route.name', $config['login_shield']['redirect_when_denied_route']['name']);
+		$redirect_when_denied_route_name = null;
+		if (array_key_exists('name', $config['login_shield']['redirect_when_denied_route'])) {
+			$redirect_when_denied_route_name = $config['login_shield']['redirect_when_denied_route']['name'];
+		}
+		$container->setParameter('peerj_user_security.login_shield.redirect_when_denied_route.name', $redirect_when_denied_route_name);
         $container->setParameter('peerj_user_security.login_shield.redirect_when_denied_route.params', $config['login_shield']['redirect_when_denied_route']['params']);
 
         $blockRoutesWhenDeniedDefaults = array(
@@ -107,7 +111,11 @@ class PeerjUserSecurityExtension extends Extension
         $container->setParameter('peerj_user_security.reset_shield.primary_reset_route.name', $config['reset_shield']['primary_reset_route']['name']);
         $container->setParameter('peerj_user_security.reset_shield.primary_reset_route.params', $config['reset_shield']['primary_reset_route']['params']);
 
-        $container->setParameter('peerj_user_security.reset_shield.redirect_when_denied_route.name', $config['reset_shield']['redirect_when_denied_route']['name']);
+		$redirect_when_denied_route_name = null;
+		if (array_key_exists('name', $config['reset_shield']['redirect_when_denied_route'])) {
+			$redirect_when_denied_route_name = $config['reset_shield']['redirect_when_denied_route']['name'];
+		}
+        $container->setParameter('peerj_user_security.reset_shield.redirect_when_denied_route.name', $redirect_when_denied_route_name);
         $container->setParameter('peerj_user_security.reset_shield.redirect_when_denied_route.params', $config['reset_shield']['redirect_when_denied_route']['params']);
 
         $blockRoutesWhenDeniedDefaults = array(

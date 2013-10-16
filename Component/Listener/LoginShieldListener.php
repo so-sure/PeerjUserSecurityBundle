@@ -171,7 +171,7 @@ class LoginShieldListener
 				if ($this->redirectWhenDeniedRoute) {
 					return $event->setResponse(new RedirectResponse($this->router->generate($this->redirectWhenDeniedRoute, $this->redirectWhenDeniedRouteParams)));
 				} else {
-					throw new HttpException(503, 'flood control - login blocked');
+                    throw new HttpException(503, 'There have been too many login failures from this ip address recently.  Please wait ' . $this->blockForMinutes . ' minutes and try again');
 				}
             }
         }
