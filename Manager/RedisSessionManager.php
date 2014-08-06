@@ -57,9 +57,13 @@ class RedisSessionManager implements SessionManagerInterface
 		}
 		*/
 		$count = $this->redis->zcount($keyIp, $timeLimit->getTimestamp(), $now->getTimestamp());
-		$items = array_fill(0, $count, null);
+                if ($count > 0) {
+		  $items = array_fill(0, $count, null);
+                } else {
+                  $items = array();
+                }
 
-        return $items;
+           return $items; 
 	}
 	
     /**
