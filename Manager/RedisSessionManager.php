@@ -65,7 +65,7 @@ class RedisSessionManager implements SessionManagerInterface
 
            return $items; 
 	}
-	
+
     /**
      *
      * @access public

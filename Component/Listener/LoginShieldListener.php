@@ -144,7 +144,7 @@ class LoginShieldListener
     {
         if ($this->enabled) {
             // Abort if we are dealing with some symfony2 internal requests.
-            if ($event->getRequestType() !== \Symfony\Component\HttpKernel\HttpKernel::MASTER_REQUEST) {
+            if (!$event->isMasterRequest()) {
                 return;
             }
 

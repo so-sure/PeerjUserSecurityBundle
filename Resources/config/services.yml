@@ -17,37 +17,37 @@ services:
     peerj_user_security.manager.session:
         class: %peerj_user_security.manager.session.class%
         arguments:
-             - @snc_redis.default
+             - "@snc_redis.default"
 
     #
     # Login/Logout Success/Failure Handlers.
     #
     peerj_user_security.component.authentication.handler.login_failure_handler:
-        class: %peerj_user_security.component.authentication.handler.login_failure_handler.class%
+        class: "%peerj_user_security.component.authentication.handler.login_failure_handler.class%"
         arguments:
-            httpKernel: @http_kernel
-            httpUtils: @security.http_utils
-            options: []
-            logger: @logger            
-            loginFailureTracker: @peerj_user_security.component.authentication.tracker.login_failure_tracker
-            enableShield: true
+            - "@http_kernel"
+            - "@security.http_utils"
+            - []
+            - "@logger"            
+            - "@peerj_user_security.component.authentication.tracker.login_failure_tracker"
+            - true
         tags:
             - { name: 'monolog.logger', channel: 'security' }
 
     peerj_user_security.component.listener.login_shield_listener:
-        class: %peerj_user_security.component.listener.login_shield_listener.class%
+        class: "%peerj_user_security.component.listener.login_shield_listener.class%"
         arguments:
-            - @router
-            - @logger
-            - @peerj_user_security.component.authentication.tracker.login_failure_tracker
-            - %peerj_user_security.login_shield.enabled%
-            - %peerj_user_security.login_shield.block_routes_when_denied%
-            - %peerj_user_security.login_shield.block_for_minutes%
-            - %peerj_user_security.login_shield.limit_failed_login_attempts%
-            - %peerj_user_security.login_shield.primary_login_route.name%
-            - %peerj_user_security.login_shield.primary_login_route.params%
-            - %peerj_user_security.login_shield.redirect_when_denied_route.name%
-            - %peerj_user_security.login_shield.redirect_when_denied_route.params%
+            - "@router"
+            - "@logger"
+            - "@peerj_user_security.component.authentication.tracker.login_failure_tracker"
+            - "%peerj_user_security.login_shield.enabled%"
+            - "%peerj_user_security.login_shield.block_routes_when_denied%"
+            - "%peerj_user_security.login_shield.block_for_minutes%"
+            - "%peerj_user_security.login_shield.limit_failed_login_attempts%"
+            - "%peerj_user_security.login_shield.primary_login_route.name%"
+            - "%peerj_user_security.login_shield.primary_login_route.params%"
+            - "%peerj_user_security.login_shield.redirect_when_denied_route.name%"
+            - "%peerj_user_security.login_shield.redirect_when_denied_route.params%"
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
             - { name: 'monolog.logger', channel: 'security' }
@@ -55,29 +55,29 @@ services:
     peerj_user_security.component.listener.reset_shield_listener:
         class: %peerj_user_security.component.listener.reset_shield_listener.class%
         arguments:
-            - @router
-            - @logger
-            - @peerj_user_security.component.authentication.tracker.reset_tracker
-            - %peerj_user_security.reset_shield.enabled%
-            - %peerj_user_security.reset_shield.block_routes_when_denied%
-            - %peerj_user_security.reset_shield.block_for_minutes%
-            - %peerj_user_security.reset_shield.limit_reset_attempts%
-            - %peerj_user_security.reset_shield.primary_reset_route.name%
-            - %peerj_user_security.reset_shield.primary_reset_route.params%
-            - %peerj_user_security.reset_shield.redirect_when_denied_route.name%
-            - %peerj_user_security.reset_shield.redirect_when_denied_route.params%
+            - "@router"
+            - "@logger"
+            - "@peerj_user_security.component.authentication.tracker.reset_tracker"
+            - "%peerj_user_security.reset_shield.enabled%"
+            - "%peerj_user_security.reset_shield.block_routes_when_denied%"
+            - "%peerj_user_security.reset_shield.block_for_minutes%"
+            - "%peerj_user_security.reset_shield.limit_reset_attempts%"
+            - "%peerj_user_security.reset_shield.primary_reset_route.name%"
+            - "%peerj_user_security.reset_shield.primary_reset_route.params%"
+            - "%peerj_user_security.reset_shield.redirect_when_denied_route.name%"
+            - "%peerj_user_security.reset_shield.redirect_when_denied_route.params%"
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
             - { name: 'monolog.logger', channel: 'security' }
 
     peerj_user_security.component.authentication.tracker.login_failure_tracker:
-        class: %peerj_user_security.component.authentication.tracker.login_failure_tracker.class%
+        class: "%peerj_user_security.component.authentication.tracker.login_failure_tracker.class%"
         arguments:
-            - @peerj_user_security.manager.session
-            - %peerj_user_security.login_shield.block_for_minutes%
+            - "@peerj_user_security.manager.session"
+            - "%peerj_user_security.login_shield.block_for_minutes%"
 
     peerj_user_security.component.authentication.tracker.reset_tracker:
-        class: %peerj_user_security.component.authentication.tracker.reset_tracker.class%
+        class: "%peerj_user_security.component.authentication.tracker.reset_tracker.class%"
         arguments:
-            - @peerj_user_security.manager.session
-            - %peerj_user_security.reset_shield.block_for_minutes%
+            - "@peerj_user_security.manager.session"
+            - "%peerj_user_security.reset_shield.block_for_minutes%"
