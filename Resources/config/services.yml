@@ -15,7 +15,7 @@ services:
     # Managers.
     #
     peerj_user_security.manager.session:
-        class: %peerj_user_security.manager.session.class%
+        class: "%peerj_user_security.manager.session.class%"
         arguments:
              - "@snc_redis.default"
 
@@ -53,7 +53,7 @@ services:
             - { name: 'monolog.logger', channel: 'security' }
             
     peerj_user_security.component.listener.reset_shield_listener:
-        class: %peerj_user_security.component.listener.reset_shield_listener.class%
+        class: "%peerj_user_security.component.listener.reset_shield_listener.class%"
         arguments:
             - "@router"
             - "@logger"
